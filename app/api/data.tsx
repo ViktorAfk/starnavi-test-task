@@ -1,39 +1,81 @@
 import axios from "axios";
-import { Hero, Planet, ResponseData } from "./definitions";
+import { Film, Hero, Planet, ResponseData, Species, Starship } from "./definitions";
+import { get } from "http";
 
 const instance = axios.create({
-  baseURL: 'https://sw-api.starnavi.io',
+  baseURL: 'https://sw-api.starnavi.io/',
 })
 
-const PEOPLE_URL = 'https://sw-api.starnavi.io/people';
-
 export async function getAllHeroes (){
-  const request = await axios.get<ResponseData>(PEOPLE_URL);
+  const request = await instance.get<ResponseData>('people');
 
   return request.data;
 }
 
 export async function getHero(id:string) {
   const request = await instance.get<Hero>(`people/${id}`);
+
   return request.data;
 };
 
 export async function getPlanet(id:string) {
-  const request = await instance.get<Planet>(`/planets/${id}`);
+  const request = await instance.get<Planet>(`planets/${id}`);
 
   return request.data;
 }
 
-export async function addPeopleToList(ids: number[]) {
-  const people:Hero[] = [];
+export async function getStarShip(id:string) {
+  const request = await instance.get<Starship>(`starships/${id}`);
 
-  ids.forEach(async(id) => {
-    const preaperedId = id.toString()
-    const data = await getHero(preaperedId);
-    console.log(data);
+  return request.data;
+}
+
+export async function getSpecies(id: string) {
+  const request = await instance.get<Species>(`species/${id}`);
+
+  return request.data;
+}
+
+export async function getFilm(id:string) {
+  const request = await instance.get<Film>(`films/${id}`);
+
+  return request.data;
+}
+
+export async function getFilms(ids:number[]) {
+  const preaperedIds = ids.map(id => id.toString());
+  const arrayOfPromises = preaperedIds.map(getFilm);
+  const result = await Promise.all(arrayOfPromises);
+
+  return result;
+}
+
+export async function universalRequest(type:string, ids: number[]) {
+  const preaperedIds = ids.map(id => id.toString());
+
+  switch (type) {
+    case 'residents': {
+      const arrayOfPromises = preaperedIds.map(getHero);
+      const result = await Promise.all(arrayOfPromises);
+
+      return result;
+    }
     
-    people.push(data)
-  })
-  console.log(people)
-  return people;
+    case 'species': {
+      const arrayOfPromises = preaperedIds.map(getSpecies);
+      const result = await Promise.all(arrayOfPromises);
+
+      return result;
+    }
+
+    case 'starships': {
+      const arrayOfPromises = preaperedIds.map(getStarShip);
+      const result = await Promise.all(arrayOfPromises);
+
+      return result;
+    }
+  
+    default:
+      return null;
+  }
 }

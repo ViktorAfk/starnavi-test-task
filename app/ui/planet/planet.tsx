@@ -1,9 +1,8 @@
 'use client'
 import { getPlanet } from "@/app/api/data";
-import { Planet } from "@/app/api/definitions";
+import { Planet, Resourses } from "@/app/api/definitions";
 import { useEffect, useState } from "react";
-import ListOfPeople from "../listofpeople/listofpeople";
-
+import ListOfValues from "../listofvalues/listofvalues";
 
 export default function HeroPlanet({ id }:{
   id: string;
@@ -66,7 +65,7 @@ export default function HeroPlanet({ id }:{
       
         <h4>residents</h4>
         <div>
-          <ListOfPeople ids={planet.residents}/>
+          <ListOfValues ids={planet.residents} typeOfValue={Resourses.People}/>
         </div>
       </div>
     </div>
@@ -78,8 +77,3 @@ export default function HeroPlanet({ id }:{
     
   )
 }
-
-  // residents: number[];
-  // films: number[];
-  // created: string;
-  // edited: string;
