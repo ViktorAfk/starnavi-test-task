@@ -6,13 +6,13 @@ export default async function HeroesTable () {
   const { results } = await getAllHeroes();
   
   return (
-    <ul>
+    <ul className="flex flex-col  w-96 rounded-xl bg-[#101010] p-4 br-2">
       {results.map(hero => {
         const { url, name} = hero;
         const preaperedId = matchId(url) || '1';
 
         return (
-        <li key={ url }>
+        <li className="mb-2" key={ url }>
           <Link href={`people/${preaperedId}`}>
             { name }
           </Link>

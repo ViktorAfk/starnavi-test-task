@@ -27,7 +27,8 @@ export default function ListOfValues({ ids, typeOfValue }: {
           <ul>
         {values.map(value => {
           const {url, name} = value;
-          const preaperedId = matchId(url)
+          const preaperedId = matchId(url);
+          
         return (
           <li key={ url }>
           <Link href={`${typeOfValue}/${preaperedId}`}>
