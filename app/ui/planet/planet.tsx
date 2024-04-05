@@ -8,11 +8,13 @@ export default function HeroPlanet({ id }:{
   id: string;
 }) {
   const [planet, setPlanet] =useState<Planet | null>(null);
+
   useEffect(() => {
    const Homeland = async() => {
     const data = await getPlanet(id);
     setPlanet(data);
    }
+
    Homeland();
   
   }, [id]);
@@ -21,49 +23,49 @@ export default function HeroPlanet({ id }:{
     <>
      {planet ? (
       <div>
-      <h3>{planet?.name}</h3>
-      <div>
+      <h4 className="text-2xl text-decorated mb-4">{planet?.name}</h4>
+      <div className="flex justify-between">
         <p>diametr</p>
         <p>{planet.diameter}</p>
       </div>
-      <div>
+      <div className="flex justify-between">
         <p>rotation period</p>
         <p>{planet.rotation_period}</p>
       </div>
-      <div>
+      <div className="flex justify-between">
         <p>orbital period</p>
         <p>{planet.orbital_period}</p>
       </div>
-      <div>
+      <div className="flex justify-between">
         <p>gravity</p>
         <p>{planet.gravity}</p>
       </div>
-      <div>
+      <div className="flex justify-between">
         <p>population</p>
         <p>{planet.population}</p>
       </div>
-      <div>
+      
+      <div className="flex justify-between">
         <p>climate</p>
         <p>{planet.climate}</p>
       </div>
 
-      <div>
+      <div className="flex justify-between gap-10">
         <p>terrain</p>
         <p>{planet.terrain}</p>
       </div>
 
-      <div>
+      <div className="flex justify-between">
         <p>surface water</p>
         <p>{planet.surface_water}</p>
       </div>
 
-      <div>
+      <div className="flex justify-between">
         <p></p>
         <p></p>
       </div>
-      <div>
-      
-        <h4>residents</h4>
+      <div className="flex justify-between">
+        <p>residents</p>
         <div>
           <ListOfValues ids={planet.residents} typeOfValue={Resourses.People}/>
         </div>

@@ -1,17 +1,38 @@
 import axios from "axios";
-import { Film, Hero, Planet, ResponseData, Species, Starship } from "./definitions";
-import { get } from "http";
+import {
+  Film,
+  Hero,
+  Planet,
+  ResponseFilmsData,
+  ResponseHeroesData,
+  Species,
+  Starship,
+} from "./definitions";
+
 
 const instance = axios.create({
   baseURL: 'https://sw-api.starnavi.io/',
 })
 
-export async function getAllHeroes (){
-  const request = await instance.get<ResponseData>('people');
+export async function getAllHeroes (page = ''){
+  const request = await instance.get<ResponseHeroesData>('people' + page);
 
   return request.data;
 }
 
+async function getFilms() {
+  const request = await instance.get<ResponseFilmsData>('films');
+
+  return request.data;
+}
+
+export async function getFilmsById(ids: number[]) {
+  const preaperedIds = ids.map(id => id.toString());
+  const arrayOfPromises = preaperedIds.map(getFilm);
+  const result = await Promise.all(arrayOfPromises);
+
+  return result;
+}
 export async function getHero(id:string) {
   const request = await instance.get<Hero>(`people/${id}`);
 
@@ -42,12 +63,20 @@ export async function getFilm(id:string) {
   return request.data;
 }
 
-export async function getFilms(ids:number[]) {
-  const preaperedIds = ids.map(id => id.toString());
-  const arrayOfPromises = preaperedIds.map(getFilm);
-  const result = await Promise.all(arrayOfPromises);
+export async function getDetailInformation(heroId:string) {
+  const person = await getHero(heroId.toString());
+  const { results } = await getFilms();
+  
+  const heroMovies = results.filter(({ characters }) => characters.includes(Number(heroId)));
 
-  return result;
+  const starship = heroMovies.map(heroMovie => {
+    const { starships } = heroMovie;
+    const heroStarships = starships.filter(starship => person.starships.includes(starship));
+
+    return {...heroMovie, hero_starships: heroStarships}
+  });
+  console.log(starship);
+  return { person, heroMovies };
 }
 
 export async function universalRequest(type:string, ids: number[]) {

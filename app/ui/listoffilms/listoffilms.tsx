@@ -1,6 +1,6 @@
 'use client'
 
-import { getFilms } from "@/app/api/data";
+import { getFilmsById } from "@/app/api/data";
 import { Film } from "@/app/api/definitions";
 import { matchId } from "@/app/utilies";
 import Link from "next/link";
@@ -11,7 +11,7 @@ export default function ListOfFilm({ ids }: {
 }) {
   const [films, setFilms] = useState<Film[] | null>(null)
   useEffect(() => {
-    getFilms(ids)
+    getFilmsById(ids)
       .then(data => setFilms(data));
   }, [ids]);
   
@@ -35,6 +35,7 @@ export default function ListOfFilm({ ids }: {
         ) : (
         <p>There are no values</p>
         )}
+        
       </div>
       
   );

@@ -12,7 +12,7 @@ export default async function HeroesTable () {
         const preaperedId = matchId(url) || '1';
 
         return (
-        <li className="mb-2" key={ url }>
+        <li className="leading-10 uppercase hover:bg-bg-color hover:text-decorated" key={ url }>
           <Link href={`people/${preaperedId}`}>
             { name }
           </Link>

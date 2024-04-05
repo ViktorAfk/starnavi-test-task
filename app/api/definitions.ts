@@ -17,11 +17,11 @@ export interface Hero {
   edited: string;
 }
 
-export type ResponseData ={
+export type ApiResponse<T> ={
   count: number;
   next: string | null;
   previous: string | null;
-  results: Hero[];
+  results: T[];
 }
 
 export interface Planet {
@@ -114,6 +114,11 @@ export interface Vehicle {
   created: string;
   edited: string;
 }
+
+export type ResponseFilmsData = ApiResponse<Film>;
+
+export type ResponseHeroesData = ApiResponse<Hero>;
+
 
 export enum Resourses {
   People = 'people',

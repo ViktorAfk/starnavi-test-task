@@ -2,6 +2,7 @@
 import { universalRequest } from "@/app/api/data";
 import { typeOfResourses, unionResourse } from "@/app/api/definitions";
 import { matchId } from "@/app/utilies";
+import { log } from "console";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -19,7 +20,6 @@ export default function ListOfValues({ ids, typeOfValue }: {
     
   }, [ids, typeOfValue]);
 
- 
   return (
       <div>
         {values 
@@ -39,7 +39,7 @@ export default function ListOfValues({ ids, typeOfValue }: {
         })}
       </ul>
         ) : (
-        'There are no values'
+        'no information'
         )}
       </div>
       

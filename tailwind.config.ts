@@ -22,7 +22,9 @@ const config: Config = {
       },
     },
     colors: {
-      docorated: '#FFDF8E'
+      decorated: '#FFDF8E',
+      white: '#FFF',
+      'bg-color': '#212121',
     }
   },
   plugins: [],
