@@ -8,7 +8,8 @@ import {
   Species,
   Starship,
 } from "./definitions";
-
+import { request } from "http";
+import { matchId } from "../utilies";
 
 const instance = axios.create({
   baseURL: 'https://sw-api.starnavi.io/',
@@ -33,6 +34,7 @@ export async function getFilmsById(ids: number[]) {
 
   return result;
 }
+
 export async function getHero(id:string) {
   const request = await instance.get<Hero>(`people/${id}`);
 
@@ -63,20 +65,17 @@ export async function getFilm(id:string) {
   return request.data;
 }
 
-export async function getDetailInformation(heroId:string) {
-  const person = await getHero(heroId.toString());
-  const { results } = await getFilms();
-  
-  const heroMovies = results.filter(({ characters }) => characters.includes(Number(heroId)));
+export async function getResource<T>(resource:string, id: number) {
+  const request = await instance.get<T>(`${resource}/${id}`);
 
-  const starship = heroMovies.map(heroMovie => {
-    const { starships } = heroMovie;
-    const heroStarships = starships.filter(starship => person.starships.includes(starship));
+  return request.data;
+}
 
-    return {...heroMovie, hero_starships: heroStarships}
-  });
-  console.log(starship);
-  return { person, heroMovies };
+export async function getResources<T>(resource:string, ids: number[]) {
+      const arrayOfPromises = ids.map(id => getResource<T>(resource, id));
+      const result = await Promise.all(arrayOfPromises);
+
+      return result;
 }
 
 export async function universalRequest(type:string, ids: number[]) {
@@ -107,4 +106,29 @@ export async function universalRequest(type:string, ids: number[]) {
     default:
       return null;
   }
+}
+
+//this function prepares all information for the node;
+export default async function getDetailInformation(heroId:string) {
+  const person = await getHero(heroId.toString());
+  const { results } = await getFilms();
+  const allHeroStarships = await getResources<Starship>('starships', person.starships);
+
+  const heroMovies = results.filter(({ characters }) => characters.includes(Number(heroId)));
+
+  const usedStarships = heroMovies.map(heroMovie => {
+    const { starships, episode_id, title } = heroMovie;
+
+    const filmLabel = `${title}-${episode_id}`;
+
+    const heroStarshipsInTheFilm = allHeroStarships.filter(starship => {
+      const starshipId = matchId(starship.url);
+
+      return starships.includes(Number(starshipId))
+    });
+
+    return { filmLabel, hero_starships: heroStarshipsInTheFilm }
+  });
+  
+  return { person, heroMovies, usedStarships };
 }

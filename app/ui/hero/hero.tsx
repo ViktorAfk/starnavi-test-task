@@ -1,5 +1,5 @@
 'use client'
-import { getDetailInformation } from "@/app/api/data";
+import getDetailInformation from "@/app/api/data";
 import { Film, Hero, Resourses } from "@/app/api/definitions";
 import Films from "@/app/ui/films/film";
 import ListOfValues from "@/app/ui/listofvalues/listofvalues";
