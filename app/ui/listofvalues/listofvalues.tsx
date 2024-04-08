@@ -2,7 +2,6 @@
 import { universalRequest } from "@/app/api/data";
 import { typeOfResourses, unionResourse } from "@/app/api/definitions";
 import { matchId } from "@/app/utilies";
-import { log } from "console";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -15,11 +14,12 @@ export default function ListOfValues({ ids, typeOfValue }: {
   useEffect(() => {
 
     universalRequest(typeOfValue, ids)
-    .then(data => setValues(data));
+      .then(data => setValues(data))
+      .catch(err => console.log(err));
     
     
   }, [ids, typeOfValue]);
-
+ console.log(values)
   return (
       <div>
         {values 

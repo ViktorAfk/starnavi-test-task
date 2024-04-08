@@ -10,65 +10,50 @@ import { useEffect, useState } from "react";
 export default function HeroCard({ hero }: {
   hero: Hero;
 }) {
-  // const [hero, setHero] = useState<Hero | null>(null);
-  // const [heroMovies, setHeroMovies] = useState<Film[] | null>(null);
-  // const { id } = useParams();
-  // const haveMovies = heroMovies && heroMovies.length > 0;
-
-  // useEffect(() => {
-  //   const loadDetailInfomation = async() => {
-  //     const {person, heroMovies} = await getDetailInformation(id.toString());
-  //     setHero(person);
-  //     setHeroMovies(heroMovies);
-  //   }
-   
-  //   loadDetailInfomation();
-  // }, [id]);
-
   
   return (
     <div className="w-100 fp-4">
-      <article className="flex gap-2">
+      <article className="grid gap-2">
       <div>
         <h2 className="text-3xl text-decorated mb-4">{hero?.name}</h2>
 
         <div className="flex justify-between">
-         <p>year of birhtday</p>
-         <p>{hero?.birth_year}</p>
+         <p className="text-left">year of birhtday</p>
+         <p className="text-right">{hero?.birth_year}</p>
         </div>
 
         <div className="flex justify-between">
-          <p>eye color</p>
+          <p className="text-left">eye color</p>
           <p>{hero.eye_color}</p>
         </div>
 
         <div className="flex justify-between">
-          <p>gender</p>
+          <p className="text-left">gender</p>
           <p>{hero.gender}</p>
         </div>
 
         <div className="flex justify-between">
-          <p>hair color</p>
+          <p className="text-left">hair color</p>
           <p>{hero?.hair_color}</p>
         </div>
 
         <div className="flex justify-between">
-          <p>height</p>
+          <p className="text-left">height</p>
           <p>{hero?.height}</p>
         </div>
 
         <div className="flex justify-between">
-          <p>mass</p>
+          <p className="text-left">mass</p>
           <p>{hero.mass}</p>
         </div>
 
         <div className="flex justify-between">
-          <p>skin color</p>
+          <p className="text-left">skin color</p>
           <p>{hero.skin_color}</p>
         </div>
 
         <div className="flex justify-between">
-          <p>mass</p>
+          <p className="text-left">mass</p>
           <p>{hero.mass}</p>
         </div>
       </div>
@@ -81,10 +66,7 @@ export default function HeroCard({ hero }: {
           <HeroPlanet id={hero.homeworld}/>
         </div>
       </div>
-        
-
-        
-        
+      
       </article>
 
     </div>

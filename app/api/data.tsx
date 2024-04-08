@@ -3,10 +3,12 @@ import {
   Film,
   Hero,
   Planet,
+  Resourses,
   ResponseFilmsData,
   ResponseHeroesData,
   Species,
   Starship,
+  typeOfResourses,
 } from "./definitions";
 import { request } from "http";
 import { matchId } from "../utilies";
@@ -16,7 +18,7 @@ const instance = axios.create({
 })
 
 export async function getAllHeroes (page = ''){
-  const request = await instance.get<ResponseHeroesData>('people' + page);
+  const request = await instance.get<ResponseHeroesData>('people/' + page);
 
   return request.data;
 }
@@ -27,43 +29,17 @@ async function getFilms() {
   return request.data;
 }
 
-export async function getFilmsById(ids: number[]) {
-  const preaperedIds = ids.map(id => id.toString());
-  const arrayOfPromises = preaperedIds.map(getFilm);
-  const result = await Promise.all(arrayOfPromises);
-
-  return result;
-}
-
 export async function getHero(id:string) {
   const request = await instance.get<Hero>(`people/${id}`);
 
   return request.data;
 };
 
-export async function getPlanet(id:string) {
-  const request = await instance.get<Planet>(`planets/${id}`);
+// export async function getPlanet(id:string) {
+//   const request = await instance.get<Planet>(`planets/${id}`);
 
-  return request.data;
-}
-
-export async function getStarShip(id:string) {
-  const request = await instance.get<Starship>(`starships/${id}`);
-
-  return request.data;
-}
-
-export async function getSpecies(id: string) {
-  const request = await instance.get<Species>(`species/${id}`);
-
-  return request.data;
-}
-
-export async function getFilm(id:string) {
-  const request = await instance.get<Film>(`films/${id}`);
-
-  return request.data;
-}
+//   return request.data;
+// }
 
 export async function getResource<T>(resource:string, id: number) {
   const request = await instance.get<T>(`${resource}/${id}`);
@@ -72,35 +48,32 @@ export async function getResource<T>(resource:string, id: number) {
 }
 
 export async function getResources<T>(resource:string, ids: number[]) {
-      const arrayOfPromises = ids.map(id => getResource<T>(resource, id));
+      const arrayOfPromises = ids.map(async(id) => await getResource<T>(resource, id));
       const result = await Promise.all(arrayOfPromises);
 
       return result;
 }
 
-export async function universalRequest(type:string, ids: number[]) {
+export async function universalRequest(type:typeOfResourses, ids: number[]) {
   const preaperedIds = ids.map(id => id.toString());
 
   switch (type) {
-    case 'residents': {
-      const arrayOfPromises = preaperedIds.map(getHero);
-      const result = await Promise.all(arrayOfPromises);
+    case Resourses.People: {
+      const people = await getResources<Hero>(type, ids);
 
-      return result;
+      return people;
     }
     
-    case 'species': {
-      const arrayOfPromises = preaperedIds.map(getSpecies);
-      const result = await Promise.all(arrayOfPromises);
+    case Resourses.Species: {
+      const species = await getResources<Species>(type, ids);
 
-      return result;
+      return species;
     }
 
-    case 'starships': {
-      const arrayOfPromises = preaperedIds.map(getStarShip);
-      const result = await Promise.all(arrayOfPromises);
+    case Resourses.Starships: {
+      const starships = await getResources<Starship>(type, ids);
 
-      return result;
+      return starships;
     }
   
     default:
@@ -124,7 +97,7 @@ export default async function getDetailInformation(heroId:string) {
     const heroStarshipsInTheFilm = allHeroStarships.filter(starship => {
       const starshipId = matchId(starship.url);
 
-      return starships.includes(Number(starshipId))
+      return starships.includes(Number(starshipId));
     });
 
     return { filmLabel, hero_starships: heroStarshipsInTheFilm }

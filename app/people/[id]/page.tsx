@@ -1,25 +1,37 @@
 'use client'
 
-import { useCalculateFlowParams } from "@/app/ui/initialstate";
+import getLayoutedElements from "@/app/layoutGraph";
+import { calculateFlowParams } from "@/app/ui/initialEdgesandNodes";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import ReactFlow from "reactflow";
+import { useCallback, useLayoutEffect } from "react";
+import ReactFlow, { useEdgesState, useNodesState } from "reactflow";
 import 'reactflow/dist/style.css';
-
-// const initialNodes = [
-//   { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
-//   { id: '2', position: { x: '50%', y: 100 }, data: { label: '2' } },
-// ];
-// const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 
 
 export default function Page() {
+  const [nodes, setNodes] = useNodesState([]);
+  const [edges, setEdges] = useEdgesState([]);
+  const { id } = useParams();
 
-const { id } = useParams();
- const { nodes, edges } = useCalculateFlowParams(id.toString())
+const onLayout = useCallback(
+  async() => {
+
+   const { initialNodes, initialEdges } = await calculateFlowParams(id.toString());
+
+   getLayoutedElements(initialNodes, initialEdges).then(({ nodes: layoutedNodes, edges: layoutedEdges }) => {
+     setNodes(layoutedNodes);
+     setEdges(layoutedEdges);
+   });
+ },
+ [id, setEdges, setNodes]
+);
+ useLayoutEffect(() => {
+  onLayout();
+}, [onLayout]);
+
   return (
     <div className="w-screen  h-dvh p-4">
-     <ReactFlow  nodes={nodes} edges={edges} fitView/>
+      <ReactFlow  nodes={nodes} edges={edges} fitView/> 
     </div>
   )
 }
