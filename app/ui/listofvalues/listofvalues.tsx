@@ -30,8 +30,8 @@ export default function ListOfValues({ ids, typeOfValue }: {
           const preaperedId = matchId(url);
           
         return (
-          <li key={ url }>
-          <Link href={`${typeOfValue}/${preaperedId}`}>
+          <li className="text-right" key={ url }>
+          <Link  href={`${preaperedId}`}>
             { name }
           </Link>
           </li>

@@ -11,8 +11,8 @@ const styles = {
 }
 const elkOptions = {
   'elk.algorithm': 'mrtree',
-  'elk.layered.spacing.nodeNodeBetweenLayers': '50',
-  'elk.spacing.nodeNode': '50',
+  'elk.layered.spacing.nodeNodeBetweenLayers': '75',
+  'elk.spacing.nodeNode': '75',
 };
 
 export default async function getLayoutedElements (nodes: Node[], edges:Edge[]){
@@ -27,8 +27,8 @@ export default async function getLayoutedElements (nodes: Node[], edges:Edge[]){
       sourcePosition: 'bottom',
 
       // Hardcode a width and height for elk to use when layouting.
-      width: 500,
-      height: 450,
+      width: 400,
+      height: node.id.includes('Hero') ? 550 : 400,
     })),
     edges: edges.map(edge => ({
       id: edge.id,

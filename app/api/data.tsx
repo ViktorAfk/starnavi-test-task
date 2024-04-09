@@ -1,8 +1,6 @@
 import axios from "axios";
 import {
-  Film,
   Hero,
-  Planet,
   Resourses,
   ResponseFilmsData,
   ResponseHeroesData,
@@ -10,7 +8,6 @@ import {
   Starship,
   typeOfResourses,
 } from "./definitions";
-import { request } from "http";
 import { matchId } from "../utilies";
 
 const instance = axios.create({

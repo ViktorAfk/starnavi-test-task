@@ -4,7 +4,7 @@ import Film from "./films/film";
 import HeroStarship from "./starship/starshiip";
 
 
-let starshipCount = 0;
+let starshipIdCount = 0;
 
 export async function calculateFlowParams(id: string) {
 
@@ -40,8 +40,8 @@ export async function calculateFlowParams(id: string) {
 
        const starshipsInCurrentMovie = usedStarships.filter(({filmLabel}) => filmLabel.includes(film.title));
        const starshipsNodes = starshipsInCurrentMovie[0].hero_starships.map(starship => {
-        let newOne = starshipCount;
-        starshipCount += 1;
+        let newOne = starshipIdCount;
+        starshipIdCount += 1;
         return {
           id: `${ starship.name }-${ newOne }`,
           data: { label: <HeroStarship starship={ starship }/>},
@@ -71,7 +71,7 @@ export async function calculateFlowParams(id: string) {
         target: `${edge.id}`,
       }
     });
-    console.log(initialEdges)
+
    return { initialNodes:[mainNode, ...flatMovieNodes], initialEdges}
   } 
   

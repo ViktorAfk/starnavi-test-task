@@ -128,7 +128,22 @@ export enum Resourses {
   Species = 'species',
   Planets = 'planets'
 }
-
+interface Unknown {
+  name: string;
+  diameter: string;
+  rotation_period: string;
+  orbital_period: string;
+  gravity: string;
+  population: string;
+  climate: string;
+  terrain: string;
+  surface_water: string; 
+  residents: number[];
+  films: number[];
+  url:string;
+  created: string;
+  edited: string;
+}
 export type unionResourse = Hero[] | Planet[] | Species[] | Starship[] | Vehicle[];
 
 export type typeOfResourses = 'people' | 'starships' | 'veichles' | 'species' |'planets';
