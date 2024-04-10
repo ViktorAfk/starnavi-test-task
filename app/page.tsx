@@ -1,14 +1,28 @@
-
+import { getAllHeroes } from "./api/data";
 import HeroesTable from "./ui/table/table";
 
-export default async function Home() {
+export default async function Home({ searchParams }: {
+  searchParams?: {
+    page: string;
+  }
+}) {
+  const page = searchParams?.page ? `?page=${searchParams?.page}` : '';
+  const data = await getAllHeroes(page);
+  const { results, next, previous } = data;
+
   return (
     <main className="container py">
       <div className="flex flex-col items-center w-full py-8">
-        <h1 className="text-5xl tracking-0.1 uppercase mb-8">World of <span className="text-decorated">StarWars</span> </h1>
-        <HeroesTable />
+        <h1 className="text-5xl tracking-0.1 uppercase mb-8">
+          World of <span className="text-decorated">StarWars</span> 
+        </h1>
+
+        <HeroesTable 
+          heroes={results} 
+          nextPage={next} 
+          previousPage={previous} 
+        />
       </div>
-     
     </main>
   );
 }

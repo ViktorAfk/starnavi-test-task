@@ -1,7 +1,5 @@
 import ELK, { ElkNode } from "elkjs/lib/elk.bundled.js";
-
 import { Edge, Node } from "reactflow";
-
 
 const elk = new ELK();
 const styles = {
@@ -15,7 +13,7 @@ const elkOptions = {
   'elk.spacing.nodeNode': '75',
 };
 
-export default async function getLayoutedElements (nodes: Node[], edges:Edge[]){
+export default async function getLayoutedElements (nodes: Node[], edges:Edge[]) {
   const graph: ElkNode = {
     id: 'root',
     layoutOptions: {'elk.direction': "DOWN", ...elkOptions},
@@ -36,6 +34,7 @@ export default async function getLayoutedElements (nodes: Node[], edges:Edge[]){
       targets: [edge.target],
     })),
   };
+
   const layout = await elk.layout(graph);
   if(!layout || !layout.children) {
     return {

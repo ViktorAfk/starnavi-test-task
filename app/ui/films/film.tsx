@@ -1,4 +1,4 @@
-import { Film } from "@/app/api/definitions";
+import type { Film } from "@/app/api/definitions";
 
 export default function Film ({ film }: {
   film: Film

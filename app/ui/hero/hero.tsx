@@ -1,4 +1,3 @@
-'use client'
 import { Hero } from "@/app/api/definitions";
 import HeroPlanet from "@/app/ui/planet/planet";
 

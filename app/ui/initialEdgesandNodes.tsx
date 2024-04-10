@@ -42,6 +42,7 @@ export async function calculateFlowParams(id: string) {
        const starshipsNodes = starshipsInCurrentMovie[0].hero_starships.map(starship => {
         let newOne = starshipIdCount;
         starshipIdCount += 1;
+  
         return {
           id: `${ starship.name }-${ newOne }`,
           data: { label: <HeroStarship starship={ starship }/>},

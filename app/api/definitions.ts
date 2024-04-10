@@ -146,4 +146,4 @@ interface Unknown {
 }
 export type unionResourse = Hero[] | Planet[] | Species[] | Starship[] | Vehicle[];
 
-export type typeOfResourses = 'people' | 'starships' | 'veichles' | 'species' |'planets';
+export type typeOfResourses = 'people' | 'starships' | 'veichles' | 'species' | 'planets';

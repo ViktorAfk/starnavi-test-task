@@ -32,12 +32,6 @@ export async function getHero(id:string) {
   return request.data;
 };
 
-// export async function getPlanet(id:string) {
-//   const request = await instance.get<Planet>(`planets/${id}`);
-
-//   return request.data;
-// }
-
 export async function getResource<T>(resource:string, id: number) {
   const request = await instance.get<T>(`${resource}/${id}`);
 
@@ -49,33 +43,6 @@ export async function getResources<T>(resource:string, ids: number[]) {
       const result = await Promise.all(arrayOfPromises);
 
       return result;
-}
-
-export async function universalRequest(type:typeOfResourses, ids: number[]) {
-  const preaperedIds = ids.map(id => id.toString());
-
-  switch (type) {
-    case Resourses.People: {
-      const people = await getResources<Hero>(type, ids);
-
-      return people;
-    }
-    
-    case Resourses.Species: {
-      const species = await getResources<Species>(type, ids);
-
-      return species;
-    }
-
-    case Resourses.Starships: {
-      const starships = await getResources<Starship>(type, ids);
-
-      return starships;
-    }
-  
-    default:
-      return null;
-  }
 }
 
 //this function prepares all information for the node;
