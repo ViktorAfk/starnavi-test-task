@@ -1,4 +1,4 @@
-import { matchId } from "@/app/utilies";
+import { matchId } from "@/app/api/utils";
 import Link from "next/link";
 import { Hero } from "@/app/api/definitions";
 import Pagination from "./pagination";
@@ -24,7 +24,7 @@ export default function HeroesTable ({ heroes, nextPage, previousPage }: {
         </li>
         )})}
       </ul>
-      
+
       <Pagination nextPage={nextPage} previousPage={previousPage}/>
     </section>
     

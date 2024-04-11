@@ -4,14 +4,12 @@ import {
   Resourses,
   ResponseFilmsData,
   ResponseHeroesData,
-  Species,
   Starship,
-  typeOfResourses,
 } from "./definitions";
-import { matchId } from "../utilies";
+import { matchId } from "./utils";
 
 const instance = axios.create({
-  baseURL: 'https://sw-api.starnavi.io/',
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
 })
 
 export async function getAllHeroes (page = ''){
@@ -26,30 +24,34 @@ async function getFilms() {
   return request.data;
 }
 
-export async function getHero(id:string) {
-  const request = await instance.get<Hero>(`people/${id}`);
-
-  return request.data;
-};
-
 export async function getResource<T>(resource:string, id: number) {
-  const request = await instance.get<T>(`${resource}/${id}`);
-
-  return request.data;
+  try {
+    const request = await instance.get<T>(`${resource}/${id}`);
+  
+    return request.data;
+  } catch(error) {
+    console.error('Get data error:', error);
+    throw new Error(`Failed to fetch ${resource} data.`)
+  }
 }
 
 export async function getResources<T>(resource:string, ids: number[]) {
-      const arrayOfPromises = ids.map(async(id) => await getResource<T>(resource, id));
-      const result = await Promise.all(arrayOfPromises);
+  try {
+    const arrayOfPromises = ids.map(id => getResource<T>(resource, id));
+    const result = await Promise.all(arrayOfPromises);
 
-      return result;
+    return result;
+  } catch(error) {
+    console.log('Get data error:', error);
+    throw new Error(`Failed to fetch ${resource} data.`)
+  }
 }
 
 //this function prepares all information for the node;
 export default async function getDetailInformation(heroId:string) {
-  const person = await getHero(heroId.toString());
+  const person = await getResource<Hero>(Resourses.People, Number(heroId));
   const { results } = await getFilms();
-  const allHeroStarships = await getResources<Starship>('starships', person.starships);
+  const allHeroStarships = await getResources<Starship>(Resourses.Starships, person.starships);
 
   const heroMovies = results.filter(({ characters }) => characters.includes(Number(heroId)));
 

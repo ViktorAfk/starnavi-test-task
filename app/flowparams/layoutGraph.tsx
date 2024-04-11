@@ -9,8 +9,8 @@ const styles = {
 }
 const elkOptions = {
   'elk.algorithm': 'mrtree',
-  'elk.layered.spacing.nodeNodeBetweenLayers': '75',
-  'elk.spacing.nodeNode': '75',
+  'elk.layered.spacing.nodeNodeBetweenLayers': '125',
+  'elk.spacing.nodeNode': '125',
 };
 
 export default async function getLayoutedElements (nodes: Node[], edges:Edge[]) {

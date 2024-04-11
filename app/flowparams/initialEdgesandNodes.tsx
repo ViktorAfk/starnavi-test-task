@@ -1,7 +1,8 @@
 import getDetailInformation from "../api/data";
-import HeroCard from "./hero/hero";
-import Film from "./films/film";
-import HeroStarship from "./starship/starshiip";
+import HeroCard from "../ui/hero/hero";
+import Film from "../ui/films/film";
+import HeroStarship from "../ui/starship/starshiip";
+import { notFound } from "next/navigation";
 
 
 let starshipIdCount = 0;
@@ -17,8 +18,12 @@ export async function calculateFlowParams(id: string) {
     person,
     heroMovies,
     usedStarships,
-  } = await getDetailInformation(id.toString());
+  } = await getDetailInformation(id);
 
+  if(!person) {
+    notFound();
+  }
+  
     const mainNode = {
       id: 'Hero',
       data: { label: <HeroCard hero={person}/> },
@@ -76,7 +81,3 @@ export async function calculateFlowParams(id: string) {
    return { initialNodes:[mainNode, ...flatMovieNodes], initialEdges}
   } 
   
-
-
- 
-

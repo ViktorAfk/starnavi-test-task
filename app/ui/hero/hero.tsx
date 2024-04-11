@@ -1,10 +1,13 @@
 import { Hero } from "@/app/api/definitions";
 import HeroPlanet from "@/app/ui/planet/planet";
+import { notFound } from "next/navigation";
 
 export default function HeroCard({ hero }: {
   hero: Hero;
 }) {
-  
+  if(!hero) {
+    notFound();
+  }
   return (
     <div className="w-100 fp-4">
       <article className="grid gap-2">

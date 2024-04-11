@@ -2,7 +2,7 @@
 
 import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { getUrlId } from "@/app/utilies";
+import { getUrlId } from "@/app/api/utils";
 
 export default function Pagination ({previousPage, nextPage}: {
   nextPage: string | null;

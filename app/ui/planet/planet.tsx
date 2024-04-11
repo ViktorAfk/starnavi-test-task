@@ -2,7 +2,7 @@
 import { getResource } from "@/app/api/data";
 import { Planet, Resourses } from "@/app/api/definitions";
 import { useEffect, useState } from "react";
-import ListOfValues from "../listofvalues/listofvalues";
+import Residents from "../listofresidents/residents";
 
 export default function HeroPlanet({ id }:{
   id: string;
@@ -25,7 +25,7 @@ export default function HeroPlanet({ id }:{
      {planet ? (
       <div>
         <h4 className="text-2xl text-decorated mb-4">
-          {planet?.name}<br />
+          {planet.name}<br />
           <span className="text-base text-white">(homeland)</span>
         </h4>
 
@@ -73,7 +73,10 @@ export default function HeroPlanet({ id }:{
           <p className="text-left text-decorated">residents</p>
   
           <div>
-            <ListOfValues ids={planet.residents} typeOfValue={Resourses.People}/>
+            {planet.residents.length < 1 ? (
+              'no information' ) : (
+                <Residents ids={planet.residents} />
+            )}
           </div>
         </div>
     </div>
