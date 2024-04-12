@@ -1,9 +1,28 @@
-import Image from "next/image";
+import { getAllHeroes } from "./api/data";
+import HeroesTable from "./ui/table/table";
 
-export default function Home() {
+export default async function Home({ searchParams }: {
+  searchParams?: {
+    page: string;
+  }
+}) {
+  const page = searchParams?.page ? `?page=${searchParams?.page}` : '';
+  const data = await getAllHeroes(page);
+  const { results, next, previous } = data;
+  
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-     <h1>Home page</h1>
+    <main className="container py">
+      <div className="flex flex-col items-center w-full py-8">
+        <h1 className="text-5xl tracking-0.1 uppercase mb-8">
+          World of <span className="text-decorated">StarWars</span> 
+        </h1>
+
+        <HeroesTable 
+          heroes={results} 
+          nextPage={next} 
+          previousPage={previous} 
+        />
+      </div>
     </main>
   );
 }
