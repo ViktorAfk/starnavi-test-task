@@ -6,8 +6,6 @@ import { useParams } from "next/navigation";
 import { useCallback, useLayoutEffect } from "react";
 import ReactFlow, { useEdgesState, useNodesState } from "reactflow";
 import 'reactflow/dist/style.css';
-import { getResource } from "@/app/api/data";
-import { Hero, Resourses } from "@/app/api/definitions";
 
 export default function Page() {
   const [nodes, setNodes] = useNodesState([]);

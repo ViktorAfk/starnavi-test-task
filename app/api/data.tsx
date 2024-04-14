@@ -13,11 +13,24 @@ const instance = axios.create({
 })
 
 export async function getAllHeroes (page = ''){
-  const request = await instance.get<ResponseHeroesData>('people/' + page);
+  try {
+    const request = await instance.get<ResponseHeroesData>('people/' + page);
 
   return request.data;
+  } catch(error) {
+    if (axios.isAxiosError(error)) {
+      console.error('Axios error:', error.message);
+    } else {
+      console.error('Network error:', error );
+    }
+    throw error; 
+  }
+  
 }
-
+export async function getHero(id:number) {
+  const request = await instance.get<Hero>(`people/${id}`);
+  return request.data;
+}
 async function getFilms() {
   const request = await instance.get<ResponseFilmsData>('films');
 
