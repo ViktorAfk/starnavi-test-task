@@ -6,5 +6,5 @@ export const matchId = (url: string) => {
 
 export const getUrlId = (url: string) => {
 
-  return new URL(url).searchParams.get('page');
+  return new URL(url).searchParams.get('page') || '1';
 }

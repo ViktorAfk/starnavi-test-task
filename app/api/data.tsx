@@ -13,18 +13,14 @@ const instance = axios.create({
 })
 
 export async function getAllHeroes (page = ''){
-  try {
+  // try {
     const request = await instance.get<ResponseHeroesData>('people/' + page);
 
   return request.data;
-  } catch(error) {
-    if (axios.isAxiosError(error)) {
-      console.error('Axios error:', error.message);
-    } else {
-      console.error('Network error:', error );
-    }
-    throw error; 
-  }
+  // } catch(error) {
+  //   console.error('Get data error:', error);
+  //   throw new Error(`Failed to fetch people data.`)
+  // }
   
 }
 export async function getHero(id:number) {
@@ -73,10 +69,9 @@ export default async function getDetailInformation(heroId:string) {
 
     const filmLabel = `${title}-${episode_id}`;
 
-    const heroStarshipsInTheFilm = allHeroStarships.filter(starship => {
-      const starshipId = matchId(starship.url);
+    const heroStarshipsInTheFilm = allHeroStarships.filter(({id}) => {
 
-      return starships.includes(Number(starshipId));
+      return starships.includes(id);
     });
 
     return { filmLabel, hero_starships: heroStarshipsInTheFilm }

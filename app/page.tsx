@@ -8,7 +8,7 @@ export default async function Home({ searchParams }: {
 }) {
   const page = searchParams?.page ? `?page=${searchParams?.page}` : '';
   const data = await getAllHeroes(page);
-  const { results, next, previous } = data;
+  
   
   return (
     <main className="container py">
@@ -17,11 +17,7 @@ export default async function Home({ searchParams }: {
           World of <span className="text-decorated">StarWars</span> 
         </h1>
 
-        <HeroesTable 
-          heroes={results} 
-          nextPage={next} 
-          previousPage={previous} 
-        />
+        <HeroesTable data={ data }/>
       </div>
     </main>
   );

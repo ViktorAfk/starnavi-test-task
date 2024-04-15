@@ -1,6 +1,8 @@
 import '@testing-library/jest-dom';
 import 'whatwg-fetch';
 import { server } from '@/mocks/server';
+import { configure } from '@testing-library/react';
+configure({testIdAttribute: 'data-cy'});
 
 beforeAll(() => {
   // Start the interception.

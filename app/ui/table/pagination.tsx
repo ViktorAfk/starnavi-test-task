@@ -10,9 +10,9 @@ export default function Pagination ({previousPage, nextPage}: {
 }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get('page')) || '';
+  const currentPage = Number(searchParams.get('page')) || '1';
   
-  const createPageURL = (pageNumber: number | string | null) => {
+  const createPageURL = (pageNumber: number | string) => {
     const params = new URLSearchParams(searchParams);
 
     if(pageNumber === null) {
@@ -34,12 +34,12 @@ export default function Pagination ({previousPage, nextPage}: {
   const checkedPrevious = previous || '';
 
   return (
-    <div className="flex justify-center gap-4">
+    <div className="flex justify-between gap-4">
       <Link className="leading-10 bg-bg-color text-center w-24 rounded-2xl hover:text-decorated" href={createPageURL(checkedPrevious)}>
         Previous
       </Link>
 
-      <Link className="leading-10 bg-bg-color text-center w-24 rounded-2xl hover:text-decorated" href={createPageURL(next)}>
+       <Link className="leading-10 bg-bg-color text-center w-24 rounded-2xl hover:text-decorated" href={createPageURL(next)}>
         Next
       </Link>
     </div>

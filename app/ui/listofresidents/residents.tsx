@@ -29,15 +29,14 @@ export default function Residents({ ids }: {
       <div>
         {residents 
         ? (
-          <ul>
+          <ul className="text-right">
         {residents.map(resident => {
-          const {url, name} = resident;
-          const preaperedId = matchId(url);
-          
+          const {id, name} = resident;
+          const lastResidentName = residents[residents?.length - 1]
         return (
-          <li className="text-right" key={ url }>
-          <Link  href={`${preaperedId}`}>
-            { name }
+          <li className="inline-block ml-2" key={ id }>
+          <Link className="hover:text-decorated" data-cy='target-element'  href={`${id}`}>
+            { lastResidentName.name === name ? name : `${name},` }
           </Link>
           </li>
         )
