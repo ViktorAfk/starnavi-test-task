@@ -1,46 +1,37 @@
 'use client';
 
-import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { getUrlId } from "@/app/api/utils";
+import clsx from "clsx";
+import { useCreateParams } from "@/app/hooks/use-create-params";
 
-export default function Pagination ({previousPage, nextPage}: {
+export default function  Pagination ({ previousPage, nextPage }: {
   nextPage: string | null;
   previousPage: string | null;
 }) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get('page')) || '1';
-  
-  const createPageURL = (pageNumber: number | string) => {
-    const params = new URLSearchParams(searchParams);
-
-    if(pageNumber === null) {
-      return `${currentPage.toString()}`;
-    }
-
-    if(pageNumber === '') {
-      params.delete('page');
-      return `/`;
-    }
-
-    params.set('page', pageNumber.toString());
-
-    return `${pathname}?${params.toString()}`;
-  };
- 
-  const next = nextPage === null ? currentPage.toString() : getUrlId(nextPage);
-  const previous = previousPage === null ? '' : getUrlId(previousPage);
-  const checkedPrevious = previous || '';
+  const {
+    createPageURL, 
+    next, 
+    checkedPreviousPage 
+  } = useCreateParams(nextPage, previousPage);
 
   return (
     <div className="flex justify-between gap-4">
-      <Link className="leading-10 bg-bg-color text-center w-24 rounded-2xl hover:text-decorated" href={createPageURL(checkedPrevious)}>
+      <Link 
+        className={clsx("leading-10 bg-bg-color text-center w-24 rounded-2xl hover:text-decorated", {
+        'invisible pointer-events-none': !previousPage,
+        })} 
+        href={createPageURL(checkedPreviousPage)}
+      >
         Previous
       </Link>
 
-       <Link className="leading-10 bg-bg-color text-center w-24 rounded-2xl hover:text-decorated" href={createPageURL(next)}>
-        Next
+       <Link 
+        className={clsx("leading-10 bg-bg-color text-center w-24 rounded-2xl hover:text-decorated", {
+          'invisible pointer-events-none': !nextPage,
+          })}  
+        href={createPageURL(next)}
+        >
+          Next
       </Link>
     </div>
   )

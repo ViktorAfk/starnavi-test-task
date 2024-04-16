@@ -6,31 +6,32 @@ import {
   ResponseHeroesData,
   Starship,
 } from "./definitions";
-import { matchId } from "./utils";
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 })
 
 export async function getAllHeroes (page = ''){
-  // try {
+  try {
     const request = await instance.get<ResponseHeroesData>('people/' + page);
 
   return request.data;
-  // } catch(error) {
-  //   console.error('Get data error:', error);
-  //   throw new Error(`Failed to fetch people data.`)
-  // }
+  } catch(error) {
+    console.error('Get data error:', error);
+    throw new Error(`Failed to fetch people data.`);
+  }
   
 }
-export async function getHero(id:number) {
-  const request = await instance.get<Hero>(`people/${id}`);
-  return request.data;
-}
-async function getFilms() {
-  const request = await instance.get<ResponseFilmsData>('films');
 
-  return request.data;
+async function getFilms() {
+  try {
+    const request = await instance.get<ResponseFilmsData>('films');
+  
+    return request.data;
+  } catch (error) {
+    console.error('Get data error:', error);
+    throw new Error(`Failed to fetch films data.`)
+  }
 }
 
 export async function getResource<T>(resource:string, id: number) {
@@ -77,10 +78,8 @@ export default async function getDetailInformation(heroId:string) {
   
       return { filmLabel, hero_starships: heroStarshipsInTheFilm }
     });
-    console.log(usedStarships);
-    
+
     return { person, heroMovies, usedStarships };
-    
   } catch (error) {
     console.log('Get data error:', error);
     throw new Error(`Failed to fetch data.`);

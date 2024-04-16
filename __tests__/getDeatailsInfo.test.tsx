@@ -24,7 +24,7 @@ describe('getDetailInformation', () => {
     expect(usedStarships).toEqual(heroWithoutStarships);
   }
  )
- 
+
  it('should throw an error, when we don\'t have such hero in database', async()=> {
   const UREAL_ID = '150';
 
@@ -40,6 +40,4 @@ describe('getDetailInformation', () => {
   }).rejects.toThrow();
 
   });
- 
-
 })

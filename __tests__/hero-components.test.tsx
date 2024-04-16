@@ -1,16 +1,20 @@
+import '@testing-library/jest-dom';
+import { HttpResponse, http } from 'msw';
+import { server } from '@/mocks/server';
+import { render, screen, waitFor } from "@testing-library/react";
 import { getResource } from '@/app/api/data';
-import { Film, Hero, Planet, Resourses, Starship } from '@/app/api/definitions';
+import {
+  Film,
+  Hero,
+  Planet,
+  Resourses,
+  Starship
+} from '@/app/api/definitions';
 import HeroFilm from '@/app/ui/films/film';
-
 import HeroCard from '@/app/ui/hero/hero';
 import HeroPlanet from '@/app/ui/planet/planet';
 import HeroStarship from '@/app/ui/starship/starshiip';
 import { residentsData } from '@/mocks/mockdata/mock-residents';
-import { server } from '@/mocks/server';
-import '@testing-library/jest-dom'
-import { render, screen, waitFor } from "@testing-library/react";
-import { HttpResponse, http } from 'msw';
-
 
 describe("Hero", () => {
   
@@ -91,6 +95,4 @@ describe("Hero", () => {
       expect(screen.getByText('A New Hope')).toBeInTheDocument();
     })
   })
-  
 });
-

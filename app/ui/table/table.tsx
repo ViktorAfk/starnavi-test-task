@@ -1,4 +1,3 @@
-// import { matchId } from "@/app/api/utils";
 import Link from "next/link";
 import { ResponseHeroesData } from "@/app/api/definitions";
 import Pagination from "./pagination";
@@ -25,6 +24,5 @@ export default function HeroesTable ({ data }: {
 
       <Pagination nextPage={next} previousPage={previous}/>
     </section>
-    
   )
 }
