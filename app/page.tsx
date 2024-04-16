@@ -1,5 +1,5 @@
 import { getAllHeroes } from "./api/data";
-import HeroesTable from "./ui/heroes-list/list";
+import HeroesList from "./ui/heroes-list/list";
 
 export default async function Home({ searchParams }: {
   searchParams?: {
@@ -17,7 +17,7 @@ export default async function Home({ searchParams }: {
           World of <span className="text-decorated">StarWars</span> 
         </h1>
 
-        <HeroesTable data={ data }/>
+        <HeroesList data={ data }/>
       </div>
     </main>
   );
