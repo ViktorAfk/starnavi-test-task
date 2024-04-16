@@ -2,13 +2,13 @@ import Link from "next/link";
 import { ResponseHeroesData } from "@/app/api/definitions";
 import Pagination from "./pagination";
 
-export default function HeroesTable ({ data }: {
+export default function HeroesList ({ data }: {
   data: ResponseHeroesData
 }) {
   const {previous, next, results:heroes} = data;
 
   return (
-    <section className="bg-[#101010] p-4 w-96 rounded-xl">
+    <section className="bg-[#101010] p-4 laptop:w-4/12 rounded-xl mobile: w-3/4">
       <ul className="flex flex-col h-96 mb-8">
         {heroes.map(hero => {
         const { id, name} = hero;
