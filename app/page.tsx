@@ -1,7 +1,7 @@
 import { getAllHeroes } from "./api/data";
 import HeroesList from "./ui/heroes-list/list";
 
-export default async function Home({ searchParams }: {
+export default async function Page({ searchParams }: {
   searchParams?: {
     page: string;
   }
