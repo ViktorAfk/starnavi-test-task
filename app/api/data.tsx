@@ -58,24 +58,32 @@ export async function getResources<T>(resource:string, ids: number[]) {
 
 //this function prepares all information for the node;
 export default async function getDetailInformation(heroId:string) {
-  const person = await getResource<Hero>(Resourses.People, Number(heroId));
-  const { results } = await getFilms();
-  const allHeroStarships = await getResources<Starship>(Resourses.Starships, person.starships);
-
-  const heroMovies = results.filter(({ characters }) => characters.includes(Number(heroId)));
-
-  const usedStarships = heroMovies.map(heroMovie => {
-    const { starships, episode_id, title } = heroMovie;
-
-    const filmLabel = `${title}-${episode_id}`;
-
-    const heroStarshipsInTheFilm = allHeroStarships.filter(({id}) => {
-
-      return starships.includes(id);
-    });
-
-    return { filmLabel, hero_starships: heroStarshipsInTheFilm }
-  });
+  try {
+    const person = await getResource<Hero>(Resourses.People, Number(heroId));
+    const { results } = await getFilms();
+    const allHeroStarships = await getResources<Starship>(Resourses.Starships, person.starships);
   
-  return { person, heroMovies, usedStarships };
+    const heroMovies = results.filter(({ characters }) => characters.includes(Number(heroId)));
+  
+    const usedStarships = heroMovies.map(heroMovie => {
+      const { starships, episode_id, title } = heroMovie;
+  
+      const filmLabel = `${title}-${episode_id}`;
+  
+      const heroStarshipsInTheFilm = allHeroStarships.filter(({id}) => {
+  
+        return starships.includes(id);
+      });
+  
+      return { filmLabel, hero_starships: heroStarshipsInTheFilm }
+    });
+    console.log(usedStarships);
+    
+    return { person, heroMovies, usedStarships };
+    
+  } catch (error) {
+    console.log('Get data error:', error);
+    throw new Error(`Failed to fetch data.`);
+
+  }
 }

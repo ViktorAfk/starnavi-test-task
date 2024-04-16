@@ -23,7 +23,7 @@ export async function calculateFlowParams(id: string) {
   if(!person) {
     notFound();
   }
-  
+
     const mainNode = {
       id: 'Hero',
       data: { label: <HeroCard hero={person}/> },

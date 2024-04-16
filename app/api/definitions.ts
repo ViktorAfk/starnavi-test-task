@@ -79,6 +79,7 @@ export interface Starship {
   pilots: number[]; 
   url: string;
   edited: string;
+  created: string;
 }
 
 export interface Film {

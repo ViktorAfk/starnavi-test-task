@@ -1,7 +1,7 @@
 'use client'
 
-import getLayoutedElements from "@/app/flowparams/layoutGraph";
-import { calculateFlowParams } from "@/app/flowparams/initialEdgesandNodes";
+import getLayoutedElements from "@/app/flow-params/layoutGraph";
+import { calculateFlowParams } from "@/app/flow-params/initialEdgesandNodes";
 import { useParams } from "next/navigation";
 import { useCallback, useLayoutEffect } from "react";
 import ReactFlow, { useEdgesState, useNodesState } from "reactflow";
