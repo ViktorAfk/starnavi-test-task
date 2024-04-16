@@ -1,6 +1,6 @@
 import type { Film } from "@/app/api/definitions";
 
-export default function Film ({ film }: {
+export default function HeroFilm ({ film }: {
   film: Film
 }) {
   

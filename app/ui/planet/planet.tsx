@@ -2,7 +2,7 @@
 import { getResource } from "@/app/api/data";
 import { Planet, Resourses } from "@/app/api/definitions";
 import { useEffect, useState } from "react";
-import Residents from "../listofresidents/residents";
+import Residents from "../residents/residents";
 
 export default function HeroPlanet({ id }:{
   id: string;
@@ -11,9 +11,16 @@ export default function HeroPlanet({ id }:{
   const [planet, setPlanet] = useState<Planet | null>(null)
   
   useEffect(() => {
+
     const Homeland = async() => {
-      const data = await getResource<Planet>(Resourses.Planets, Number(id));
-      setPlanet(data);
+      try {
+        const data = await getResource<Planet>(Resourses.Planets, Number(id));
+        setPlanet(data);
+      } catch (error) {
+        console.log('Get data error:', error);
+        throw new Error(`Failed to fetch data.`);
+      }
+     
     }
 
     Homeland();

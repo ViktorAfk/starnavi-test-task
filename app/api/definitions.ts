@@ -1,4 +1,5 @@
 export interface Hero {
+  id: number;
   name: string;
   birth_year: string;
   eye_color: string;
@@ -60,6 +61,7 @@ export interface Species {
 }
 
 export interface Starship {
+  id: number,
   name: string; 
   model: string; 
   starship_class: string;
@@ -77,6 +79,7 @@ export interface Starship {
   pilots: number[]; 
   url: string;
   edited: string;
+  created: string;
 }
 
 export interface Film {
