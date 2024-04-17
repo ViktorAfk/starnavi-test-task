@@ -44,4 +44,5 @@ Detailed information about the hero: When clicking on a specific hero, display d
   # or
   bun test
   ```
+- [DEMO LINK](https://starnavi-starwars-task.vercel.app/) 
   
