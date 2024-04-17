@@ -63,6 +63,7 @@ export const createEdges = (nodes: {
         id:`${edge.id}`,
         source: 'Hero',
         target: `${edge.id}`,
+        label: 'Film'
       }
     }
 
@@ -70,6 +71,7 @@ export const createEdges = (nodes: {
       id:`${edge.id}`,
       source: `${edge.parent}`,
       target: `${edge.id}`,
+      label: 'Starships',
     }
   });
 };

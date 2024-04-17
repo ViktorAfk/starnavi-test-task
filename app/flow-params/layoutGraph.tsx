@@ -8,6 +8,8 @@ const styles = {
   width: '400px',
   background: '#101010',
   color: 'white',
+  fontSize: '14px',
+  // letterSpacing: '1px',
 }
 const elkOptions = {
   'elk.algorithm': 'mrtree',
@@ -69,7 +71,15 @@ export default async function getLayoutedElements (nodes: Node[], edges:Edge[]) 
       return {
         ...initialEdge,
         source: edge.sources[0],
-        target: edge.targets[0]
+        target: edge.targets[0],
+        labelStyle: {
+            fill: '#FFDF8E',
+            fontSize: '14px',
+        },
+        labelBgStyle: {
+          fill: '#101010',
+        }
+
       } as Edge;
     })
   }

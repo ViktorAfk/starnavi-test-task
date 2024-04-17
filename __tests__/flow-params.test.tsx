@@ -1,4 +1,4 @@
-import { calculateFlowParams } from "@/app/flow-params/initialEdgesandNodes"
+import { calculateFlowParams } from "@/app/flow-params/initial-elements"
 import { mockEdges } from "@/mocks/mockdata/mock-edges";
 import { mockNodes } from "@/mocks/mockdata/mock-nodes";
 import { server } from "@/mocks/server";

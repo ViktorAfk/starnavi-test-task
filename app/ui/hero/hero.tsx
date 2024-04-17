@@ -1,11 +1,10 @@
 import { Hero } from "@/app/api/definitions";
 import HeroPlanet from "@/app/ui/planet/planet";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
-export default function HeroCard({ hero }: {
-  hero: Hero;
-}) {
-  if(!hero) {
+export default function HeroCard({ hero }: { hero: Hero }) {
+  if (!hero) {
     notFound();
   }
   return (
@@ -13,12 +12,14 @@ export default function HeroCard({ hero }: {
       <article className="grid gap-2">
         <div>
           <div className="mb-4">
-            <h2 className="text-3xl text-decorated inline-block">{hero?.name}</h2>
+            <h2 className="text-3xl text-decorated inline-block">
+              {hero?.name}
+            </h2>
           </div>
 
           <div className="flex justify-between mb-1">
-          <p className="text-left text-decorated">year of birhtday</p>
-          <p className="text-right">{hero?.birth_year}</p>
+            <p className="text-left text-decorated">year of birhtday</p>
+            <p className="text-right">{hero?.birth_year}</p>
           </div>
 
           <div className="flex justify-between mb-1">
@@ -56,11 +57,10 @@ export default function HeroCard({ hero }: {
             <p>{hero.mass}</p>
           </div>
         </div>
-
         <div>
-          <HeroPlanet id={hero.homeworld}/>
+          <HeroPlanet id={hero.homeworld} />
         </div>
       </article>
     </div>
-  )
+  );
 }
