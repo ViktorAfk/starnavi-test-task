@@ -1,7 +1,7 @@
 'use client'
 
 import getLayoutedElements from "@/app/flow-params/layoutGraph";
-import { calculateFlowParams } from "@/app/flow-params/initialEdgesandNodes";
+import { calculateFlowParams } from "@/app/flow-params/initial-elements";
 import { useParams } from "next/navigation";
 import { useCallback, useLayoutEffect, useState } from "react";
 import ReactFlow, { useEdgesState, useNodesState } from "reactflow";
@@ -18,7 +18,7 @@ const onLayout = useCallback(
   async() => {
     try {
       const { initialNodes, initialEdges } = await calculateFlowParams(id.toString());
-
+      console.log(initialEdges);
    getLayoutedElements(initialNodes, initialEdges).then(({ nodes: layoutedNodes, edges: layoutedEdges }) => {
      setNodes(layoutedNodes);
      setEdges(layoutedEdges);
