@@ -5,7 +5,7 @@ import { server } from "@/mocks/server";
 import { HttpResponse, http } from "msw";
 
 describe('calculate flow params', () => {
- it('should return corect initial params, if id exist', async() => {
+ it('should return corect initial params, if id exists', async() => {
   const HERO_ID = '10';
   const {initialEdges, initialNodes} = await calculateFlowParams(HERO_ID);
   const nodesIds = initialNodes.map(({ id }) => id);

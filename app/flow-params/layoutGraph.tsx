@@ -1,5 +1,7 @@
 import ELK, { ElkNode } from "elkjs/lib/elk.bundled.js";
 import { Edge, Node } from "reactflow";
+// on this page we use ELK.js third-party library  
+//and  'tree' algoritm to build  layouting Nodes
 
 const elk = new ELK();
 const styles = {

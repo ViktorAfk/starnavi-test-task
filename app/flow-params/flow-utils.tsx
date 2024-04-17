@@ -3,7 +3,7 @@ import HeroFilm from "../ui/films/film";
 import HeroStarship from "../ui/starship/starshiip";
 
 
-
+// this function helps to prepare basic movies and starships nodes
 export const getMoviesAndSrashipsNodes = (
   heroMovies: Film[],
   usedStarships: {
@@ -45,6 +45,7 @@ export const getMoviesAndSrashipsNodes = (
   });
 }
 
+//this function create basic edges
 export const createEdges = (nodes: {
   id: string;
   data: {

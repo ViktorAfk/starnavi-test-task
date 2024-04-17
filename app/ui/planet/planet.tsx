@@ -12,7 +12,7 @@ export default function HeroPlanet({ id }:{
   
   useEffect(() => {
 
-    const Homeland = async() => {
+    const getHomeland = async() => {
       try {
         const data = await getResource<Planet>(Resourses.Planets, Number(id));
         setPlanet(data);
@@ -20,11 +20,10 @@ export default function HeroPlanet({ id }:{
         console.log('Get data error:', error);
         throw new Error(`Failed to fetch data.`);
       }
-     
     }
 
-    Homeland();
-  
+    getHomeland();
+
   }, [id]);
   
   return (
