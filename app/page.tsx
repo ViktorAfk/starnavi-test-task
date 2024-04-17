@@ -9,7 +9,6 @@ export default async function Page({ searchParams }: {
   const page = searchParams?.page ? `?page=${searchParams?.page}` : '';
   const data = await getAllHeroes(page);
   
-  
   return (
     <main className="container py">
       <div className="flex flex-col items-center w-full py-8">

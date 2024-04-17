@@ -2,7 +2,7 @@ import getDetailInformation from "../api/data";
 import HeroCard from "../ui/hero/hero";
 import { createEdges, getMoviesAndSrashipsNodes } from "./flow-utils";
 
-
+// this functions calculate all nodes and edges
 export async function calculateFlowParams(id: string) {
   try {
     const position = {

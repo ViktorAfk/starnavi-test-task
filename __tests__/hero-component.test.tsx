@@ -19,7 +19,8 @@ import { residentsData } from '@/mocks/mockdata/mock-residents';
 describe("Hero", () => {
   
   it('should have corect hero name - Obi-Wan Kenobi, after loading data', async() => {
-    const hero = await getResource<Hero>(Resourses.People, 10);
+    const HERO_ID = 10;
+    const hero = await getResource<Hero>(Resourses.People, HERO_ID);
     render(<HeroCard hero={hero} />);
 
     await waitFor ( () => {

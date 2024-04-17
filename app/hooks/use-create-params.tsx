@@ -1,6 +1,7 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import { getUrlId } from "../api/utils";
 
+// Use the custom hook to calculate search params for pagination
 export const useCreateParams = (nextPage: string | null, 
   previousPage: string | null) => {
   const pathname = usePathname();

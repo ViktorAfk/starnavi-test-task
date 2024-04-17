@@ -7,10 +7,12 @@ import {
   Starship,
 } from "./definitions";
 
+//create an instance of our API URL. 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 })
 
+//this function gets list of all heroes that exists on that page;
 export async function getAllHeroes (page = ''){
   try {
     const request = await instance.get<ResponseHeroesData>('people/' + page);
@@ -23,6 +25,7 @@ export async function getAllHeroes (page = ''){
   
 }
 
+//this function gets all films from API;
 async function getFilms() {
   try {
     const request = await instance.get<ResponseFilmsData>('films');
@@ -33,7 +36,7 @@ async function getFilms() {
     throw new Error(`Failed to fetch films data.`)
   }
 }
-
+//this function gets some resource that we need;
 export async function getResource<T>(resource:string, id: number) {
   try {
     const request = await instance.get<T>(`${resource}/${id}`);
@@ -45,6 +48,7 @@ export async function getResource<T>(resource:string, id: number) {
   }
 }
 
+//this function helps to get more then one resources;
 export async function getResources<T>(resource:string, ids: number[]) {
   try {
     const arrayOfPromises = ids.map(id => getResource<T>(resource, id));
