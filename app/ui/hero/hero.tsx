@@ -1,7 +1,6 @@
 import { Hero } from "@/app/api/definitions";
 import HeroPlanet from "@/app/ui/planet/planet";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 
 export default function HeroCard({ hero }: { hero: Hero }) {
   if (!hero) {

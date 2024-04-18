@@ -18,10 +18,9 @@ const onLayout = useCallback(
   async() => {
     try {
       const { initialNodes, initialEdges } = await calculateFlowParams(id.toString());
-      console.log(initialEdges);
-   getLayoutedElements(initialNodes, initialEdges).then(({ nodes: layoutedNodes, edges: layoutedEdges }) => {
-     setNodes(layoutedNodes);
-     setEdges(layoutedEdges);
+      getLayoutedElements(initialNodes, initialEdges).then(({ nodes: layoutedNodes, edges: layoutedEdges }) => {
+        setNodes(layoutedNodes);
+        setEdges(layoutedEdges);
    });
     } catch (error) {
       console.error('Get data error:', error);
