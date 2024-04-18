@@ -1,6 +1,6 @@
 import getDetailInformation from "../api/data";
 import HeroCard from "../ui/hero/hero";
-import { createEdges, getMoviesAndSrashipsNodes } from "./flow-utils";
+import { createEdges, getMoviesAndStarshipsNodes, } from "./flow-utils";
 
 // this functions calculate all nodes and edges
 export async function calculateFlowParams(id: string) {
@@ -22,11 +22,10 @@ export async function calculateFlowParams(id: string) {
       position,
     } 
   
-    const moviesNodes = getMoviesAndSrashipsNodes(heroMovies, usedStarships, position)
+    const moviesNodes = getMoviesAndStarshipsNodes(heroMovies, usedStarships, position)
     const flatMovieNodes = moviesNodes.flat();
   
     const initialEdges = createEdges(flatMovieNodes);
-    console.log([mainNode, ...flatMovieNodes]);
     
     return { initialNodes:[mainNode, ...flatMovieNodes], initialEdges}
   } catch (error) {

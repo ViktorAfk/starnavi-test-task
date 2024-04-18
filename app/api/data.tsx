@@ -69,7 +69,7 @@ export default async function getDetailInformation(heroId:string) {
     const allHeroStarships = await getResources<Starship>(Resourses.Starships, person.starships);
   
     const heroMovies = results.filter(({ characters }) => characters.includes(Number(heroId)));
-  
+    
     const usedStarships = heroMovies.map(heroMovie => {
       const { starships, episode_id, title } = heroMovie;
   

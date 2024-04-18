@@ -4,7 +4,7 @@ import HeroStarship from "../ui/starship/starshiip";
 
 
 // this function helps to prepare basic movies and starships nodes
-export const getMoviesAndSrashipsNodes = (
+export const getMoviesAndStarshipsNodes = (
   heroMovies: Film[],
   usedStarships: {
   filmLabel: string;

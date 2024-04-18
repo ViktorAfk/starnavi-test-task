@@ -9,7 +9,6 @@ const styles = {
   background: '#101010',
   color: 'white',
   fontSize: '14px',
-  // letterSpacing: '1px',
 }
 const elkOptions = {
   'elk.algorithm': 'mrtree',
